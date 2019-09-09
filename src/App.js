@@ -1,26 +1,56 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import Navigation from './components/Navigation/navigation';
+import Logo from './components/Logo/logo';
+import ImageInput from './components/ImageInput/imageinput';
+import Rank from './components/Rank/rank';
+// import FaceRecognition from './facerecognition'
 import './App.css';
+import 'tachyons';
+import Particles from 'react-particles-js';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+const particlesOptions = {
+  particles: {
+    number: {
+      value: 250,
+      density: {
+        enable: false,
+        value_area: 4700
+      }
+    },
+  }
+}
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      input: '',
+    }
+  }
+
+  onInputChange = (event) => {
+    console.log(event.target.value);
+  }
+
+  onButtonSubmit = () => {
+    console.log('click')
+  }
+
+  render() {
+    return (<div className="App" >
+      <Particles className='particles'
+        params={particlesOptions}
+      />
+
+      <Navigation />
+      <Logo />
+      <Rank />
+      <ImageInput onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
+
+
     </div>
-  );
+    );
+  }
 }
 
 export default App;

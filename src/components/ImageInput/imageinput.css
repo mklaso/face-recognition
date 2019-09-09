@@ -1,0 +1,13 @@
+#p1 {
+    font-size: 1.25em;
+}
+
+.form {
+    width: 600px;
+    background:
+        linear-gradient(63deg, rgb(212, 122, 230) 23%, transparent 23%) 7px 0,
+        linear-gradient(63deg, transparent 74%, rgb(212, 122, 230) 78%),
+        linear-gradient(63deg, transparent 34%, rgb(212, 122, 230), rgb(252, 222, 124) 38%, rgb(212, 122, 230) 58%, transparent 62%),
+        rgb(252, 222, 124);
+    background-size: 16px 48px;
+}
