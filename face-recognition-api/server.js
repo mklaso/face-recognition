@@ -1,9 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
+const cors = require('cors');
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 
 const database = {
     users: [
@@ -11,6 +13,7 @@ const database = {
             id: '123',
             name: 'john',
             email: 'johnnybgud1@gmail.com',
+            password: 'yeet',
             entries: 0,
             joined: new Date() //creates a date when executed
         },
@@ -18,6 +21,7 @@ const database = {
             id: '124',
             name: 'jenny',
             email: 'jennayy23@gmail.com',
+            password: 'yahoo',
             entries: 0,
             joined: new Date()
         },
@@ -37,17 +41,11 @@ app.get("/", (req, res) => {
 
 //sign in
 app.post('/signin', (req, res) => {
-    bcrypt.compare(myPlaintextPassword, hash).then(function (res) {
-        // res == true
-    });
-    bcrypt.compare(someOtherPlaintextPassword, hash).then(function (res) {
-        // res == false
-    });
 
     if (req.body.email === database.users[0].email && req.body.password === database.users[0].password) {
-        res.json('success!');
+        res.json(database.users[0]);
     } else {
-        res.status(400).json('user doesn\'t exist.');
+        res.status(400).json('error logging in');
     }
     res.json('signin');
 })
@@ -65,7 +63,6 @@ app.post('/register', (req, res) => {
         id: '125',
         name: name,
         email: email,
-        password: password,
         entries: 0,
         joined: new Date()
     })
@@ -104,7 +101,7 @@ app.put('/image', (req, res) => {
     }
 })
 
-app.listen(3000, () => {
+app.listen(3001, () => {
     //console.log('yeet');
 })
 
