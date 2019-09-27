@@ -47,13 +47,15 @@ class App extends Component {
   }
 
   loadUser = (data) => {
-    this.setState({user: {
+    this.setState({
+      user: {
         id: data.id,
         name: data.name,
         email: data.email,
         entries: data.entries,
         joined: data.joined
-    }})
+      }
+    })
   }
 
   //obtains the boundaries of the face within the picture
@@ -90,21 +92,21 @@ class App extends Component {
         if (response) {
           fetch('http://localhost:3001/image', {
             method: 'put',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-             id: this.state.user.id
+              id: this.state.user.id
             })
           })
-          .then(response => response.json())
-          .then(count => {
-            this.setState(Object.assign(this.state.user, { entries: count }))
-          })
+            .then(response => response.json())
+            .then(count => {
+              this.setState(Object.assign(this.state.user, { entries: count }))
+            })
         }
 
-      this.displayFaceBox(this.calculateFaceLocation(response))
+        this.displayFaceBox(this.calculateFaceLocation(response))
       })
       .catch(error => console.log(error));
-}
+  }
 
   //changes page depending on route
   onRouteChange = (route) => {
@@ -118,7 +120,7 @@ class App extends Component {
 
   render() {
     let { isSignedIn, imageUrl, route, box } = this.state;
-    let {name, entries} = this.state.user;
+    let { name, entries } = this.state.user;
     return (
       <div className="App" >
         <Particles className='particles'
@@ -129,7 +131,7 @@ class App extends Component {
         {route === 'home'
           ? <div>
             <Logo />
-            <Rank name={name} entries={entries}/>
+            <Rank name={name} entries={entries} />
             <ImageInput
               onInputChange={this.onInputChange}
               onButtonSubmit={this.onButtonSubmit}
@@ -142,8 +144,8 @@ class App extends Component {
           : (
 
             this.state.route === 'signin'
-              ? <SignIn loadUser={this.loadUser}onRouteChange={this.onRouteChange} />
-              : <Register loadUser={this.loadUser}onRouteChange={this.onRouteChange} />
+              ? <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
+              : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
           )
         }
       </div>
